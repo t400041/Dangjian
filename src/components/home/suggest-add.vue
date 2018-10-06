@@ -13,7 +13,7 @@
     <mt-field class="myFeild" label="电话" placeholder="请输入电话" type="number" v-model="phone"></mt-field>
     <mt-field class="myFeild" label="建议" placeholder="请留下您的建议" type="textarea" rows="4" v-modal="suggest"></mt-field>
     <mt-field class="myFeild" label="验证码" v-model="captcha">
-      <img src="../../assets/logo.png" height="45px" width="100px">
+      <img src="../../assets/head.png" height="45px" width="100px">
     </mt-field>
   </div>
   <mt-button class="submit" type="danger" size="large">提交</mt-button>

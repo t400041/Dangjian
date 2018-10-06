@@ -5,8 +5,10 @@ import router from './router'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import App from './App.vue'
+import Viser from 'viser-vue'
 
 Vue.use(MintUI)
+Vue.use(Viser)
 
 Vue.config.productionTip = false
 

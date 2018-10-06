@@ -130,7 +130,7 @@ export default {
       animate: false,
       iconList: [
         {icon: '../static/icon/dynamic.png', name: '党建动态', link: ''},
-        {icon: '../static/icon/class.png', name: '三会一课', link: ''},
+        {icon: '../static/icon/class.png', name: '三会一课', link: 'SHYK'},
         {icon: '../static/icon/activity.png', name: '活动报名', link: ''},
         {icon: '../static/icon/questionnaire.png', name: '调查问卷', link: 'Questionnaire'},
         {icon: '../static/icon/suggest.png', name: '建言献策', link: 'Suggest'},
