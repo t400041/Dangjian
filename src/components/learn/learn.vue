@@ -1,24 +1,16 @@
 <template>
   <div class="viewBox">
-    <mt-header class="myHeader" title="在线学习">
-      <div slot="right">
-        <img class="headImg" src="" alt="">
-      </div>
-    </mt-header>
-    <mt-swipe class="mySwipe" :auto="4000">
-      <mt-swipe-item v-for="(item, index) in imgList" :key="index">
-        <img :src="item.src" alt="">
-      </mt-swipe-item>
-    </mt-swipe>
+    <XHeader class="myHeader" title="在线学习" :left-options="{'showBack': false}"></XHeader>
+    <Swiper :list="imgList" class="mySwipe" :auto="true" :show-desc-mask="false" dots-position="center" :aspect-ratio="0.48" :loop="true">
+    </Swiper>
     <div class="iconBox row">
-      <div class="iconItem column spc" v-for="(item, index) in iconList" :key="index">
+      <div class="iconItem column spc" v-for="(item, index) in iconList" :key="index" @click="junoLink(item.link)">
         <img :src="item.icon" alt="">
         <p>{{item.name}}</p>
       </div>
     </div>
     <div class="linkCell row spb">
       <div>最近课程</div>
-
     </div>
     <div class="newsBox">
       <ul>
@@ -42,23 +34,25 @@
 </template>
 <script>
 import TabNav from '../../components/common/tab-nav'
+import { Swiper } from 'vux'
 export default {
   name: 'User',
   metaInfo: {
     title: '在线学习'
   },
   components: {
-    TabNav
+    TabNav,
+    Swiper
   },
   data () {
     return {
       selected: '在线学习',
       imgList: [
-        { src: '../static/icon/banner.png' },
-        { src: '../static/icon/banner.png' }
+        { img: '../static/icon/banner.png' },
+        { img: '../static/icon/banner.png' }
       ],
       iconList: [
-        { icon: '../static/icon/education.png', name: '专题教育' },
+        { icon: '../static/icon/education.png', name: '专题教育', link: 'Education' },
         { icon: '../static/icon/test2.png', name: '在线考试' },
         { icon: '../static/icon/policy.png', name: '政策法规' },
         { icon: '../static/icon/cleangovernmen.png', name: '反腐倡廉' }
@@ -94,6 +88,17 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+
+  },
+  methods: {
+    junoLink (link) {
+      this.$router.push({name: link})
+    },
+    myLearn () {
+      this.$router.push({name: 'Studycenter'})
+    }
   }
 }
 </script>
@@ -105,6 +110,10 @@ export default {
   min-height: 100%;
   overflow: hidden;
   padding-bottom: 80px;
+}
+.addSuggest{
+  width: 35px;
+  margin-right: 10px;
 }
 .mySwipe {
   width: 100%;

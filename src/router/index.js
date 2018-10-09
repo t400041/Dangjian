@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Home from '@/components/home'
 import Service from '@/components/service/service'
 import Chat from '@/components/chat/chat'
-import Learn from '@/components/learn/learn'
 import Manage from '@/components/manage/manage'
 import InfoCenter from '@/components/home/info-center'
 import Questionnaire from '@/components/home/questionnaire'
@@ -17,8 +16,14 @@ import MyMeeting from '@/components/home/my-meeting'
 import MeetingDetail from '@/components/home/meeting-detail'
 import Checkin from '@/components/home/checkin'
 import Trends from '@/components/home/trends'
+import Login from '@/components/home/login'
+import ChangePassword from '@/components/home/change-password'
 import NewsDetail from '@/components/home/news-detail'
 import ManageMember from '@/components/manage/manage-member'
+import Learn from '@/components/learn/learn'
+import CourseDetail from '@/components/learn/course-detail'
+import Education from '@/components/learn/education'
+import Studycenter from '@/components/learn/study-center'
 
 Vue.use(Router)
 
@@ -110,9 +115,34 @@ export default new Router({
       component: Trends
     },
     {
+      path: '/Login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/ChangePassword',
+      name: 'ChangePassword',
+      component: ChangePassword
+    },
+    {
       path: '/NewsDetail',
       name: 'NewsDetail',
       component: NewsDetail
+    },
+    {
+      path: '/CourseDetail',
+      name: 'CourseDetail',
+      component: CourseDetail
+    },
+    {
+      path: '/Education',
+      name: 'Education',
+      component: Education
+    },
+    {
+      path: '/Studycenter',
+      name: 'Studycenter',
+      component: Studycenter
     },
     {
       path: '/InfoCenter',

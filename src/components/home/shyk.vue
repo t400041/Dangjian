@@ -1,10 +1,6 @@
 <template>
   <div class="viewBox">
-  <mt-header class="myHeader" title="三会一课">
-    <div slot="left">
-      <img class="back" src="../../assets/icon/back.png" alt="" @click="back()">
-    </div>
-  </mt-header>
+  <XHeader class="myHeader" title="三会一课" :left-options="{'backText':''}"></XHeader>
     <div class="bgBox">
       <img class="userHead" src="../../assets/head.png" alt="">
       <p class="f_miidle" style="text-align: center;">待参加会议></p>

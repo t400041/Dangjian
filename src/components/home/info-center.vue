@@ -1,116 +1,45 @@
 <template>
   <div class="viewBox">
-    <mt-header class="myHeader" title="消息">
-      <div slot="left">
-        <img class="back" src="../../assets/icon/back.png" alt="" @click="back()">
-      </div>
-    </mt-header>
+    <XHeader class="myHeader" title="消息" :left-options="{'backText':''}"></XHeader>
     <div class="infoBox">
-      <div class="infoItem row">
+      <div class="infoItem row" v-for="(item, index) in info" :key="index">
         <div class="infoIcon">
-          <img src="../../assets/icon/suggest.png" alt="">
-          <mt-badge class="mybadge" type="error" size="small">10</mt-badge>
+          <img :src="item.img" alt="">
+          <Badge class="myBadge" :text="item.infonum"></Badge>
         </div>
-        <div>
-          <p class="f_big">三会一课</p>
-          <p class="f_small color_gray">您有一个会议通知，请注意查看~</p>
-        </div>
-        <div>
-          <p class="f_middle">time</p>
+        <div style="width: calc(100% - 70px)">
+          <p class="row als spb">
+            <span class="f_big">{{item.name}}</span>
+            <span class="f_middle color_gray">{{item.time}}</span>
+          </p>
+          <p class="f_small color_gray">{{item.news}}</p>
         </div>
       </div>
-      <div class="infoItem row">
-        <div class="infoIcon">
-          <img src="../../assets/icon/suggest.png" alt="">
-          <mt-badge class="mybadge" type="error" size="small">5</mt-badge>
-        </div>
-        <div>
-          <p class="f_big">组织活动</p>
-          <p class="f_small color_gray">您有一个会议通知，请注意查看~</p>
-        </div>
-        <div>
-          <p class="f_middle">time</p>
-        </div>
-      </div>
-      <div class="infoItem row">
-        <div class="infoIcon">
-          <img src="../../assets/icon/suggest.png" alt="">
-          <mt-badge class="mybadge" type="error" size="small">10</mt-badge>
-        </div>
-        <div>
-          <p class="f_big">心愿认领</p>
-          <p class="f_small color_gray">您有一个会议通知，请注意查看~</p>
-        </div>
-        <div>
-          <p class="f_middle">time</p>
-        </div>
-      </div>
-      <div class="infoItem row">
-        <div class="infoIcon">
-          <img src="../../assets/icon/suggest.png" alt="">
-          <mt-badge class="mybadge" type="error" size="small">10</mt-badge>
-        </div>
-        <div>
-          <p class="f_big">在线学习</p>
-          <p class="f_small color_gray">您有一个会议通知，请注意查看~</p>
-        </div>
-        <div>
-          <p class="f_middle">time</p>
-        </div>
-      </div>
-      <div class="infoItem row">
-        <div class="infoIcon">
-          <img src="../../assets/icon/suggest.png" alt="">
-          <mt-badge class="mybadge" type="error" size="small">10</mt-badge>
-        </div>
-        <div>
-          <p class="f_big">建言献策</p>
-          <p class="f_small color_gray">您有一个会议通知，请注意查看~</p>
-        </div>
-        <div>
-          <p class="f_middle">time</p>
-        </div>
-      </div>
-      <div class="infoItem row">
-        <div class="infoIcon">
-          <img src="../../assets/icon/suggest.png" alt="">
-          <mt-badge class="mybadge" type="error" size="small">10</mt-badge>
-        </div>
-        <div>
-          <p class="f_big">领导信箱</p>
-          <p class="f_small color_gray">您有一个会议通知，请注意查看~</p>
-        </div>
-        <div>
-          <p class="f_middle">time</p>
-        </div>
-      </div>
-      <div class="infoItem row">
-        <div class="infoIcon">
-          <img src="../../assets/icon/suggest.png" alt="">
-          <mt-badge class="mybadge" type="error" size="small">10</mt-badge>
-        </div>
-        <div>
-          <p class="f_big">民主评议</p>
-          <p class="f_small color_gray">您有一个会议通知，请注意查看~</p>
-        </div>
-        <div>
-          <p class="f_middle">time</p>
-        </div>
-      </div>
-
     </div>
   </div>
 </template>
 <script>
+import { Badge } from 'vux'
 export default {
   name: 'User',
   metaInfo: {
-    title: '党建动态'
+    title: '消息中心'
+  },
+  components: {
+    Badge
   },
   data () {
     return {
       selected: '交流',
-      act: '1'
+      info: [
+        {name: '三会一课', img: '../static/icon/class-info.png', news: '您有一个会议通知，请注意查看~', time: '2018-10-08', infonum: 5},
+        {name: '组织活动', img: '../static/icon/class-info.png', news: '您有一个会议通知，请注意查看~', time: '2018-10-08', infonum: 6},
+        {name: '心愿认领', img: '../static/icon/wish-info.png', news: '您有一个会议通知，请注意查看~', time: '2018-10-08', infonum: 7},
+        {name: '在线学习', img: '../static/icon/learn-info.png', news: '您有一个会议通知，请注意查看~', time: '2018-10-08', infonum: 8},
+        {name: '建言献策', img: '../static/icon/comment-info.png', news: '您有一个会议通知，请注意查看~', time: '2018-10-08', infonum: 9},
+        {name: '领导信箱', img: '../static/icon/mailbox-info.png', news: '您有一个会议通知，请注意查看~', time: '2018-10-08', infonum: 10},
+        {name: '民主评议', img: '../static/icon/evaluate-info.png', news: '您有一个会议通知，请注意查看~', time: '2018-10-08', infonum: 11}
+      ]
     }
   },
   mounted () {
@@ -131,10 +60,6 @@ export default {
   min-height: 100%;
   overflow: hidden;
   padding-bottom: 80px;
-}
-.mint-navbar .mint-tab-item.is-selected{
-  color: #e51c23;
-  border-color: #e51c23;
 }
 .infoBox{
   background-color: #fff;
@@ -159,7 +84,7 @@ export default {
     height: 100%;
     display: block;
   }
-  .mybadge{
+  .myBadge{
     position: absolute;
     right: 0;
     top: 0;

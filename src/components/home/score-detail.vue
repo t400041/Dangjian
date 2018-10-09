@@ -1,10 +1,6 @@
 <template>
   <div class="viewBox">
-    <mt-header class="myHeader" title="积分详情">
-      <div slot="left">
-        <img class="back" src="../../assets/icon/back.png" alt="" @click="back()">
-      </div>
-    </mt-header>
+    <XHeader class="myHeader" title="积分详情" :left-options="{'backText':''}"></XHeader>
     <v-chart
       :data="data"
       :padding="[20, 'auto']">

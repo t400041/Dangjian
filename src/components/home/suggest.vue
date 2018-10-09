@@ -1,13 +1,11 @@
 <template>
 <div class="viewBox">
-  <mt-header class="myHeader" title="建言献策">
-    <div slot="left">
-      <img class="back" src="../../assets/icon/back.png" alt="" @click="back()">
-    </div>
-    <div slot="right">
+
+  <XHeader class="myHeader" title="建言献策" :left-options="{'backText':''}" >
+    <div slot="right" class="rightSlot">
       <img class="addSuggest" src="../../assets/icon/add_suggest.png" alt="" @click="addSuggest()">
     </div>
-  </mt-header>
+  </XHeader>
   <div class="linkCell row spb">
     <div>历史建言献策精选</div>
   </div>
@@ -55,6 +53,11 @@ export default {
     border-left: 3px solid #e51c23;
     padding-left: 8px;
   }
+}
+.rightSlot{
+  position: absolute;
+  top: -8px;
+  right: 0;
 }
 .suggestList{
   background-color: #fff;

@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@antv/data-set": "^0.9.6",
-    "mint-ui": "^2.2.13",
     "viser-vue": "^2.3.2",
     "vue": "^2.5.2",
+    "vue-meta": "^1.5.5",
     "vue-router": "^3.0.1",
     "vux": "^2.9.2"
   },

@@ -1,18 +1,9 @@
 <template>
   <div class="viewBox">
-    <mt-header class="myHeader" title="交流">
-      <div slot="right">
-        <img class="headImg" src="" alt="">
-      </div>
-    </mt-header>
-    <mt-navbar class="myNavbar" v-model="act">
-      <mt-tab-item id="1">最新</mt-tab-item>
-      <mt-tab-item id="2">热门</mt-tab-item>
-    </mt-navbar>
-    <!-- tab-container -->
-    <mt-tab-container class="chatContainer" v-model="act">
-      <mt-tab-container-item id="1">
-        <div class="chatList row" v-for="(item, index) in chatList1" :key="index">
+    <XHeader class="myHeader" title="交流" :left-options="{'showBack': false}"></XHeader>
+    <Mytab :tabList="tabList" @tabchange="tabchange"></Mytab>
+    <div class="" v-if="act == 0">
+      <div class="chatList row" v-for="(item, index) in chatList1" :key="index">
           <div>
             <img class="chatuser" src="" alt="">
           </div>
@@ -30,28 +21,33 @@
             </div>
           </div>
         </div>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="2">
-        222
-      </mt-tab-container-item>
-    </mt-tab-container>
+    </div>
+    <div class="" v-if="act == 1">
+      222
+    </div>
   <TabNav :selected="selected"></TabNav>
   </div>
 </template>
 <script>
 import TabNav from '../../components/common/tab-nav'
+import Mytab from '../../components/common/my-tab'
 export default {
   name: 'User',
   metaInfo: {
     title: '交流'
   },
   components: {
-    TabNav
+    TabNav,
+    Mytab
   },
   data () {
     return {
       selected: '交流',
-      act: '1',
+      act: 0,
+      tabList: [
+        {name: '最新'},
+        {name: '热门'}
+      ],
       chatList1: [
         {img: '', name: '用户名', istop: '1', content: '内容', transmit: '转发内容', share: '120', comment: '200', likeNum: '30'},
         {img: '', name: '用户名', istop: '0', content: '', transmit: '转发内容', share: '120', comment: '200', likeNum: '30'},
@@ -64,6 +60,14 @@ export default {
       chatList2: [
 
       ]
+    }
+  },
+  mounted () {
+
+  },
+  methods: {
+    tabchange (act) {
+      this.act = act
     }
   }
 }

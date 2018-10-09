@@ -1,15 +1,12 @@
 <template>
   <div class="viewBox">
-    <mt-header class="myHeader" title="攀西党建">
-      <div slot="left">
-        <img class="headImg" src="../assets/head.png" alt="" @click="goCenter()">
+    <XHeader class="myHeader" title="党建" :left-options="{'showBack':false}">
+      <div class="overwrite-left" slot="overwrite-left">
+        <img class="headImg" src="../assets/head.png" alt="" @click="goCenter">
       </div>
-    </mt-header>
-    <mt-swipe class="mySwipe" :auto="4000">
-      <mt-swipe-item v-for="(item, index) in imgList" :key="index">
-        <img :src="item.src" alt="">
-      </mt-swipe-item>
-    </mt-swipe>
+    </XHeader>
+    <Swiper :list="imgList" class="mySwipe" :auto="true" :show-desc-mask="false" dots-position="center" :aspect-ratio="0.48" :loop="true">
+    </Swiper>
     <div class="infoScroll row spb">
       <div class="row">
         <img class="infoicon" src="../assets/icon/infoicon.png" alt="">
@@ -66,70 +63,29 @@
         </div>
       </div>
     </div>
-    <!-- <mt-tabbar fixed v-model="selected">
-      <mt-tab-item id="1">
-        <img slot="icon" src="../assets/icon/home_p.png">
-        首页
-      </mt-tab-item>
-      <mt-tab-item id="2">
-        <img slot="icon" src="../assets/icon/manage_n.png">
-        党务管理
-      </mt-tab-item>
-      <mt-tab-item id="3">
-        <img slot="icon" src="../assets/icon/chat_n.png">
-        交流
-      </mt-tab-item>
-      <mt-tab-item id="4">
-        <img slot="icon" src="../assets/icon/learn_n.png">
-        在线学习
-      </mt-tab-item>
-      <mt-tab-item id="5">
-        <img slot="icon" src="../assets/icon/service_n.png">
-        我的
-      </mt-tab-item>
-    </mt-tabbar> -->
-    <!-- <div class="tabNav row">
-      <div class="tabItem column spc als">
-        <img src="../assets/icon/home_p.png">
-        <p>首页</p>
-      </div>
-      <div class="tabItem column spc als">
-        <img src="../assets/icon/manage_n.png">
-        <p>党务管理</p>
-      </div>
-      <div class="tabItem column spc als">
-        <img src="../assets/icon/chat_n.png">
-        <p>交流</p>
-      </div>
-      <div class="tabItem column spc als">
-        <img src="../assets/icon/learn_n.png">
-        <p>在线学习</p>
-      </div>
-      <div class="tabItem column spc als">
-        <img src="../assets/icon/service_n.png">
-        <p>我的</p>
-      </div>
-    </div> -->
     <TabNav :selected="selected"></TabNav>
   </div>
 </template>
 
 <script>
 import TabNav from '../components/common/tab-nav'
+import { Swiper } from 'vux'
 export default {
   name: 'Home',
   metaInfo: {
     title: '首页'
   },
   components: {
-    TabNav
+    TabNav,
+    Swiper
   },
   data () {
     return {
+      ratio: 0.48,
       selected: '首页',
       animate: false,
       iconList: [
-        {icon: '../static/icon/dynamic.png', name: '党建动态', link: ''},
+        {icon: '../static/icon/dynamic.png', name: '党建动态', link: 'Trends'},
         {icon: '../static/icon/class.png', name: '三会一课', link: 'SHYK'},
         {icon: '../static/icon/activity.png', name: '活动报名', link: ''},
         {icon: '../static/icon/questionnaire.png', name: '调查问卷', link: 'Questionnaire'},
@@ -139,8 +95,9 @@ export default {
         {icon: '../static/icon/more.png', name: '更多', link: ''}
       ],
       imgList: [
-        {src: '../static/icon/banner.png'},
-        {src: '../static/icon/banner.png'}
+        {url: 'javascript:', img: '../static/icon/banner.png'},
+        {url: 'javascript:', img: '../static/icon/banner.png', title: ''},
+        {url: 'javascript:', img: '../static/icon/banner.png', title: ''}
       ],
       newsList: [
         {title: '文章标题', viewNum: '12345', createTime: '2018-9-17 15:41', img: '../static/icon/photo.png'},
@@ -208,7 +165,9 @@ ul {
 
 .headImg{
   width: 35px;
-  margin-left: 10px
+  position: absolute;
+  top: -7px;
+  left: 0;
 }
 .mySwipe {
   width: 100%;

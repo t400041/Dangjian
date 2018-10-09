@@ -1,71 +1,54 @@
 <template>
   <div class="viewBox">
-    <mt-header class="myHeader" title="党建动态">
-      <div slot="right">
-        <img class="headImg" src="" alt="">
-      </div>
-    </mt-header>
+    <XHeader class="myHeader" title="党建动态" :left-options="{'backText':''}"></XHeader>
     <div class="trandsNav">
-      <mt-navbar v-model="act">
-        <mt-tab-item id="1">全部</mt-tab-item>
-        <mt-tab-item id="2">图片新闻</mt-tab-item>
-        <mt-tab-item id="3">学习十九大</mt-tab-item>
-        <mt-tab-item id="4">党建动态</mt-tab-item>
-        <mt-tab-item id="5">领导讲话</mt-tab-item>
-      </mt-navbar>
+      <Mytab :tabList="tabList" @tabchange="tabchange"></Mytab>
     </div>
-    <!-- tab-container -->
-    <mt-tab-container v-model="act">
-      <mt-tab-container-item id="1">
-        <mt-swipe class="mySwipe" :auto="4000">
-          <mt-swipe-item v-for="(item, index) in imgList" :key="index">
-            <img :src="item.src" alt="">
-          </mt-swipe-item>
-        </mt-swipe>
-        <div class="newsBox">
-          <ul>
-            <li class="newsList row" v-for="(item, index) in newsList" :key="index" @click="goDetail">
-              <div class="newsContent column spb">
-                <p class="title">{{item.title}}</p>
-                <div class="row spb newInfo">
-                  <p><img class="comment" src="../../assets/icon/comment.png" alt="">{{item.viewNum}}</p>
-                  <p>{{item.createTime}}</p>
-                </div>
-              </div>
-              <div class="newsImg">
-                <img :src="item.img" alt="">
-              </div>
-            </li>
-          </ul>
-        </div>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="2">
-        222
-      </mt-tab-container-item>
-      <mt-tab-container-item id="3">
-        111
-      </mt-tab-container-item>
-      <mt-tab-container-item id="4">
-        222
-      </mt-tab-container-item>
-      <mt-tab-container-item id="5">
-        222
-      </mt-tab-container-item>
-    </mt-tab-container>
+    <div class="newsBox" v-if="act == 0">
+      <ul>
+        <li class="newsList row" v-for="(item, index) in newsList" :key="index" @click="goDetail">
+          <div class="newsContent column spb">
+            <p class="title">{{item.title}}</p>
+            <div class="row spb newInfo">
+              <p><img class="comment" src="../../assets/icon/comment.png" alt="">{{item.viewNum}}</p>
+              <p>{{item.createTime}}</p>
+            </div>
+          </div>
+          <div class="newsImg">
+            <img :src="item.img" alt="">
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="newsBox" v-if="act == 1">111</div>
+    <div class="newsBox" v-if="act == 2">222</div>
+    <div class="newsBox" v-if="act == 3">333</div>
+    <div class="newsBox" v-if="act == 4">444</div>
   </div>
 </template>
 <script>
+import Mytab from '../../components/common/my-tab'
 export default {
   name: 'Trends',
   metaInfo: {
     title: '党建动态'
   },
+  components: {
+    Mytab
+  },
   data () {
     return {
-      act: '1',
+      act: 0,
       imgList: [
         {src: '../static/icon/banner.png'},
         {src: '../static/icon/banner.png'}
+      ],
+      tabList: [
+        {name: '全部'},
+        {name: '图片新闻'},
+        {name: '学习十九大'},
+        {name: '党建动态'},
+        {name: '领导讲话'}
       ],
       newsList: [
         {title: '文章标题', viewNum: '12345', createTime: '2018-9-17 15:41', img: '../static/icon/photo.png'},
@@ -84,6 +67,9 @@ export default {
     },
     goDetail () {
       this.$router.push({name: 'NewsDetail'})
+    },
+    tabchange (act) {
+      this.act = act
     }
   }
 }
@@ -104,6 +90,11 @@ export default {
   img{
     width: 100%;
   }
+}
+.trandsNav{
+  width: 100%;
+  background: #fff;
+  padding: 0 10px;
 }
 .newsBox{
   background-color: #fff;

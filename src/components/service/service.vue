@@ -1,10 +1,10 @@
 <template>
   <div class="viewBox">
-    <mt-header class="myHeader" title="服务">
-      <div slot="right">
+    <XHeader class="myHeader" title="服务" :left-options="{'showBack':false}" >
+      <div slot="right" class="rightSlot">
         <img class="headImg" src="" alt="">
       </div>
-    </mt-header>
+    </XHeader>
     <div class="linkCell row spb">
       <div>社区服务</div>
       <div class="row">
@@ -49,8 +49,8 @@
           <p class="f_small"><span class="color_gray">地址：</span>{{item.add}}</p>
         </div>
         <div class="btnBox">
-          <mt-button type="danger" size="small" v-if="item.state == 1">报名</mt-button>
-          <mt-button type="danger" size="small" disabled v-if="item.state == 2">已满</mt-button>
+          <XButton text="报名" type="warn" mini v-if="item.state == 1"></XButton>
+          <XButton text="已满" type="warn" mini v-if="item.state == 2" disabled></XButton>
         </div>
       </div>
     </div>
@@ -77,13 +77,15 @@
 </template>
 <script>
 import TabNav from '../../components/common/tab-nav'
+import { XButton } from 'vux'
 export default {
   name: 'User',
   metaInfo: {
     title: '服务'
   },
   components: {
-    TabNav
+    TabNav,
+    XButton
   },
   data () {
     return {
@@ -123,6 +125,11 @@ export default {
   min-height: 100%;
   overflow: hidden;
   padding-bottom: 80px;
+}
+.rightSlot{
+  position: absolute;
+  top: -8px;
+  right: 0;
 }
 .linkCell{
   background-color: #fff;
@@ -212,5 +219,8 @@ export default {
   font-size: 13px;
   width: 19vw;
   text-align: center;
+}
+.weui-btn_mini{
+  padding:0 12px;
 }
 </style>

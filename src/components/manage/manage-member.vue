@@ -1,15 +1,8 @@
 <template>
   <div class="viewBox">
-    <mt-header class="myHeader" title="党员管理">
-      <div slot="left">
-        <img class="back" src="../../assets/icon/back.png" alt="" @click="back()">
-      </div>
-    </mt-header>
-    <mt-swipe class="mySwipe" :auto="4000">
-      <mt-swipe-item v-for="(item, index) in imgList" :key="index">
-        <img :src="item.src" alt="">
-      </mt-swipe-item>
-    </mt-swipe>
+    <XHeader class="myHeader" title="党员管理" :left-options="{'backText':''}"></XHeader>
+    <Swiper :list="imgList" class="mySwipe" :auto="true" :show-desc-mask="false" dots-position="center" :aspect-ratio="0.48" :loop="true">
+    </Swiper>
     <div class="iconBox row">
       <div class="iconItem column spc" v-for="(item, index) in iconList" :key="index">
         <img :src="item.icon" alt="">
@@ -36,17 +29,21 @@
   </div>
 </template>
 <script>
+import { Swiper } from 'vux'
 export default {
   name: 'User',
   metaInfo: {
     title: '党员管理'
   },
+  components: {
+    Swiper
+  },
   data () {
     return {
       imgList: [
-        { src: '../static/icon/mbanner.png' },
-        { src: '../static/icon/mbanner2.png' },
-        { src: '../static/icon/mbanner3.png' }
+        { img: '../static/icon/mbanner.png' },
+        { img: '../static/icon/mbanner2.png' },
+        { img: '../static/icon/mbanner3.png' }
       ],
       iconList: [
         { icon: '../static/icon/change.png', name: '党员转入' },

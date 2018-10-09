@@ -1,51 +1,48 @@
 <template>
 <div class="viewBox">
-  <mt-header class="myHeader" title="我的会议">
-    <div slot="left">
-      <img class="back" src="../../assets/icon/back.png" alt="" @click="back()">
-    </div>
-  </mt-header>
+  <XHeader class="myHeader" title="我的会议" :left-options="{'backText':''}"></XHeader>
   <div class="meetingBox">
-    <mt-navbar class="myNavbar" v-model="act">
-      <mt-tab-item id="1">待参加</mt-tab-item>
-      <mt-tab-item id="2">已结束</mt-tab-item>
-    </mt-navbar>
-    <mt-tab-container class="chatContainer" v-model="act">
-      <mt-tab-container-item id="1">
-        <div class="meetingList">
-          <div class="meetingItem row" v-for="(item, index) in meetingList" :key="index">
-            <div class="meetngTime">
-              <p class="f_small">{{item.date1}}</p>
-              <p class="f_big f_b">{{item.date2}}</p>
-              <p class="f_small">{{item.date3}}</p>
-            </div>
-            <div class="meetingContent">
-              <div class="meetingTitle f_b">
-                {{item.title}}
-              </div>
-              <div class="row spb f_small">
-                <span class="row als"><img src="../../assets/icon/time.png" alt="">{{item.time}}</span>
-                <span class="row als"><img src="../../assets/icon/address.png" alt="">{{item.address}}</span>
-              </div>
-            </div>
+    <Mytab :tabList="tabList" @tabchange="tabchange"></Mytab>
+
+    <div class="meetingList"  v-if="act == 0">
+      <div class="meetingItem row" v-for="(item, index) in meetingList" :key="index">
+        <div class="meetngTime">
+          <p class="f_small">{{item.date1}}</p>
+          <p class="f_big f_b">{{item.date2}}</p>
+          <p class="f_small">{{item.date3}}</p>
+        </div>
+        <div class="meetingContent">
+          <div class="meetingTitle f_b">
+            {{item.title}}
+          </div>
+          <div class="row spb f_small">
+            <span class="row als"><img src="../../assets/icon/time.png" alt="">{{item.time}}</span>
+            <span class="row als"><img src="../../assets/icon/address.png" alt="">{{item.address}}</span>
           </div>
         </div>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="2">
-      </mt-tab-container-item>
-    </mt-tab-container>
+      </div>
+    </div>
+    <div class="meetingList"  v-if="act == 1">222</div>
   </div>
 </div>
 </template>
 <script>
+import Mytab from '../../components/common/my-tab'
 export default {
   name: 'MyMeeting',
   metaInfo: {
     title: '我的会议'
   },
+  components: {
+    Mytab
+  },
   data () {
     return {
-      act: '1',
+      act: 0,
+      tabList: [
+        {name: '待参加'},
+        {name: '已结束'}
+      ],
       meetingList: [
         {date1: '2018-10', date2: '01', date3: '星期一', title: '会议标题', time: '09:30-11:30', address: '会议厅'},
         {date1: '2018-10', date2: '01', date3: '星期一', title: '会议标题会议标题会议标题会议标题会议标题', time: '09:30-11:30', address: '会议厅'},
@@ -59,6 +56,9 @@ export default {
   methods: {
     back () {
       this.$router.back(-1)
+    },
+    tabchange (act) {
+      this.act = act
     }
   }
 }
@@ -68,7 +68,7 @@ export default {
   background-color: #fff;
 }
 .meetingList{
-  margin-top: 50px;
+  // margin-top: 50px;
 }
 .meetingItem{
   border-bottom: 1px solid #f0f0f0;

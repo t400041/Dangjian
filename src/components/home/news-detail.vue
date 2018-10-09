@@ -1,10 +1,6 @@
 <template>
 <div class="viewBox">
-  <mt-header class="myHeader" title="新闻详情">
-    <div slot="left">
-      <img class="back" src="../../assets/icon/back.png" alt="" @click="back()">
-    </div>
-  </mt-header>
+  <XHeader class="myHeader" title="新闻详情" :left-options="{'backText':''}"></XHeader>
   <div class="titleBox">
     <h2 class="f_big">
       {{newsInfo.title}}

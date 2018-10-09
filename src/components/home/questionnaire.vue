@@ -1,10 +1,6 @@
 <template>
   <div class="viewBox">
-    <mt-header class="myHeader" title="调查问卷">
-      <div slot="left">
-        <img class="back" src="../../assets/icon/back.png" alt="" @click="back()">
-      </div>
-    </mt-header>
+    <XHeader class="myHeader" title="调查问卷" :left-options="{'backText':''}"></XHeader>
     <div class="questionList" v-for="(item, index) in questionList" :key="index">
       <p class="f_big f_b">
         {{item.name}}

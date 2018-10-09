@@ -1,6 +1,6 @@
 <template>
   <div class="viewBox">
-    <XHeader class="myHeader" title="我的" :left-options="{'backText':''}"></XHeader>
+    <XHeader class="myHeader" title="我的学习" :left-options="{'backText':''}"></XHeader>
     <div class="headBox">
       <img class="userHead" src="../../assets/head.png" alt="">
       <p class="userName f_big f_b">用户名</p>
@@ -20,35 +20,67 @@
         <p class="f_small">本月排名</p>
       </div>
     </div>
-    <div class="userInfoList row" v-for="(item, index) in userInfoList" :key="index">
-      <img class="listIcon" :src="item.icon" alt="">
-      <div class="row spb">
-        <p class="f_middle">{{item.name}}</p>
-        <img src="../../assets/icon/arrow_right.png" alt="">
-      </div>
+    <Mytab :tabList="tabList" @tabchange="tabchange"></Mytab>
+    <div v-if="act == 0">
+      <CourseList :courseList="learnList"></CourseList>
     </div>
-    <div class="signOut">
-      退出
+    <div v-if="act == 1">
+      <CourseList :courseList="learnList"></CourseList>
+    </div>
+    <div v-if="act == 2">
+      <CourseList :courseList="learnList"></CourseList>
     </div>
   </div>
 </template>
 <script>
+import CourseList from '../../components/common/course-list'
+import Mytab from '../../components/common/my-tab'
 export default {
-  name: 'Usercenter',
+  name: 'Studycenter',
   metaInfo: {
     title: '我的'
   },
+  components: {
+    CourseList,
+    Mytab
+  },
   data () {
     return {
-      userInfoList: [
-        {icon: '../static/icon/message.png', name: '我的消息', link: ''},
-        {icon: '../static/icon/dynamic_s.png', name: '我的动态', link: ''},
-        {icon: '../static/icon/collection.png', name: '我的收藏', link: ''},
-        {icon: '../static/icon/suggest_s.png', name: '反馈意见', link: ''},
-        {icon: '../static/icon/book.png', name: '通讯录', link: ''},
-        {icon: '../static/icon/password.png', name: '修改密码', link: ''},
-        {icon: '../static/icon/data.png', name: '个人资料', link: ''},
-        {icon: '../static/icon/version.png', name: '查看版本号', link: ''}
+      act: 0,
+      tabList: [
+        {name: '学习中'},
+        {name: '已完成'},
+        {name: '收藏'}
+      ],
+      learnList: [
+        {
+          title: '课程名称',
+          like: '12345',
+          createTime: '12345',
+          img: '../static/icon/photo.png',
+          mark: '【必修】'
+        },
+        {
+          title: '课程名称',
+          like: '12345',
+          createTime: '12345',
+          img: '../static/icon/photo.png',
+          mark: '【必修】'
+        },
+        {
+          title: '课程名称',
+          like: '12345',
+          createTime: '12345',
+          img: '../static/icon/photo.png',
+          mark: '【必修】'
+        },
+        {
+          title: '课程名称',
+          like: '12345',
+          createTime: '12345',
+          img: '../static/icon/photo.png',
+          mark: '【必修】'
+        }
       ]
     }
   },
@@ -56,6 +88,9 @@ export default {
   methods: {
     back () {
       this.$router.back(-1)
+    },
+    tabchange (act) {
+      this.act = act
     }
   }
 }
@@ -114,18 +149,12 @@ export default {
     }
   }
 }
-.listIcon{
-  width: 26px;
-  height: 26px;
-  margin: 11px;
-  // background: #e50;
+.viewBox{
+  padding-bottom: 0;
 }
-.signOut{
-  width: calc(100% - 20px);
-  margin: 10px;
-  background: #fff;
-  text-align: center;
-  padding:15px;
+.mint-navbar .mint-tab-item.is-selected{
   color: #e51c23;
+  border-color: #e51c23;
+  margin-bottom: 0;
 }
 </style>

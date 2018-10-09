@@ -1,29 +1,35 @@
 <template>
 <div class="viewBox">
-  <mt-header class="myHeader" title="新建议">
-    <div slot="left">
-      <img class="back" src="../../assets/icon/back.png" alt="" @click="back()">
-    </div>
-  </mt-header>
+  <XHeader class="myHeader" title="新建议" :left-options="{'backText':''}"></XHeader>
   <div class="linkCell row spb">
     <div>欢迎使用在线留言</div>
   </div>
   <div class="feildBox">
-    <mt-field class="myFeild" label="姓名" placeholder="请输入姓名" v-model="username"></mt-field>
-    <mt-field class="myFeild" label="电话" placeholder="请输入电话" type="number" v-model="phone"></mt-field>
-    <mt-field class="myFeild" label="建议" placeholder="请留下您的建议" type="textarea" rows="4" v-modal="suggest"></mt-field>
-    <mt-field class="myFeild" label="验证码" v-model="captcha">
-      <img src="../../assets/head.png" height="45px" width="100px">
-    </mt-field>
+    <group>
+      <x-input title="姓名" label-width="90px" v-model="username" type="text" placeholder="请输入姓名"></x-input>
+      <x-input title="电话" label-width="90px" v-model="phone" type="tel" placeholder="请输入电话"></x-input>
+      <x-textarea title="建议" label-width="90px" :value="suggest" :max="200" placeholder="请留下您的建议" :rows="4"></x-textarea>
+      <x-input title="验证码" label-width="90px" v-model="captcha">
+        <div slot="right">
+          <img  src="../../assets/head.png" alt="">
+        </div>
+      </x-input>
+    </group>
   </div>
-  <mt-button class="submit" type="danger" size="large">提交</mt-button>
+  <XButton class="submit" text="提交" type="warn"></XButton>
 </div>
 </template>
 <script>
+import { XInput, XTextarea, XButton } from 'vux'
 export default {
   name: 'SuggestAdd',
   metaInfo: {
     title: '建言献策'
+  },
+  components: {
+    XInput,
+    XTextarea,
+    XButton
   },
   data () {
     return {
@@ -58,7 +64,8 @@ export default {
   margin: 15px;
   width: calc(100% - 30px);
 }
-.myFeild{
+.feildBox{
   border-bottom: 1px solid #f0f0f0;
+  background-color: #fff;
 }
 </style>
